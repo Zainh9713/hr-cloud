@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  hrcloud-web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: hrcloud/web:latest
+    container_name: hrcloud-web
+    restart: always
+    ports:
+      - "3000:3000"
+      - "3001:3001" # WebSocket port
+    environment:
+      - NODE_ENV=production
+      - MONGODB_URI=${MONGODB_URI}
+      - JWT_SECRET=${JWT_SECRET}
+      - STORAGE_PROVIDER=${STORAGE_PROVIDER:-local}
+      - S3_BUCKET_NAME=${S3_BUCKET_NAME}
+      - S3_REGION=${S3_REGION}
+      - S3_ACCESS_KEY_ID=${S3_ACCESS_KEY_ID}
+      - S3_SECRET_ACCESS_KEY=${S3_SECRET_ACCESS_KEY}
+      - NEXT_PUBLIC_APP_URL=${NEXT_PUBLIC_APP_URL}
+      - WS_PORT=3001
+    volumes:
+      - hrcloud-uploads:/app/uploads
+    depends_on:
+      - mongodb
+      - redis
+
+  mongodb:
+    image: mongo:6.0
+    container_name: hrcloud-mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - hrcloud-mongo-data:/data/db
+
+  redis:
+    image: redis:alpine
+    container_name: hrcloud-redis
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - hrcloud-redis-data:/data
+
+volumes:
+  hrcloud-uploads:
+  hrcloud-mongo-data:
+  hrcloud-redis-data:
