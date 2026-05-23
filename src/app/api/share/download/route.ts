@@ -115,7 +115,7 @@ export async function GET(request: Request) {
     // 3. Log download/stream access
     const ip = request.headers.get("x-forwarded-for") || null;
     const userAgent = request.headers.get("user-agent") || null;
-    await ShareService.logAccess(share._id.toString(), "download", ip, userAgent);
+    await ShareService.logAccess(String(share._id), "download", ip, userAgent);
 
     // 4. Retrieve streaming handle from storage provider
     const storageProvider = StorageFactory.getProvider();

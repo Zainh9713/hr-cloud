@@ -41,7 +41,7 @@ export default function FolderTree() {
         return fParentId === targetParentId;
       })
       .map((f) => ({
-        _id: f._id.toString(),
+        _id: String(f._id),
         name: f.name,
         parentId: f.parentId ? f.parentId.toString() : null,
         color: f.color || "#0ea5e9",

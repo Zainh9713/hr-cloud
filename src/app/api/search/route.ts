@@ -161,7 +161,7 @@ export async function GET(request: Request) {
           });
           
           const scoreMap = new Map(similar.map(s => [s.fileId, s.score]));
-          matchedFiles.sort((a, b) => (scoreMap.get(b._id.toString()) || 0) - (scoreMap.get(a._id.toString()) || 0));
+          matchedFiles.sort((a, b) => (scoreMap.get(String(b._id)) || 0) - (scoreMap.get(String(a._id)) || 0));
           vectorResults = matchedFiles;
         }
       } catch (vectorErr) {
@@ -180,8 +180,8 @@ export async function GET(request: Request) {
     // 7. Merge Vector and Keyword Results (deduplicated)
     let finalFiles = files;
     if (vectorResults.length > 0) {
-      const seenIds = new Set(vectorResults.map(f => f._id.toString()));
-      const filteredStandardFiles = files.filter(f => !seenIds.has(f._id.toString()));
+      const seenIds = new Set(vectorResults.map(f => String(f._id)));
+      const filteredStandardFiles = files.filter(f => !seenIds.has(String(f._id)));
       finalFiles = [...vectorResults, ...filteredStandardFiles];
     }
 

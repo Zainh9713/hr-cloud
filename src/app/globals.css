@@ -1,18 +1,6 @@
-@import "tailwindcss";
-
-@theme {
-  --color-background: #05050f;
-  --color-foreground: #e2e8f0;
-  --color-primary: #8b5cf6;
-  --color-primary-dark: #6d28d9;
-  --color-secondary: #0ea5e9;
-  --color-accent: #f43f5e;
-  --color-panel: rgba(15, 23, 42, 0.6);
-  --color-border: rgba(255, 255, 255, 0.1);
-
-  --font-sans: var(--font-geist-sans), "Inter", sans-serif;
-  --font-mono: var(--font-geist-mono), monospace;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
   --background: #05050f;

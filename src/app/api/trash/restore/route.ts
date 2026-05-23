@@ -69,8 +69,8 @@ export async function POST(request: Request) {
       const findDescendants = (parentId: string) => {
         const children = allFolders.filter(f => f.parentId?.toString() === parentId);
         for (const child of children) {
-          descendants.push(child._id.toString());
-          findDescendants(child._id.toString());
+          descendants.push(String(child._id));
+          findDescendants(String(child._id));
         }
       };
       

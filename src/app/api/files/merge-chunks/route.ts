@@ -170,7 +170,7 @@ export async function POST(request: Request) {
     // Trigger AI summarization or OCR in background
     try {
       await backgroundJobQueue.enqueue(userId, "AI_SUMMARIZE", {
-        fileId: fileRecord._id.toString(),
+        fileId: String(fileRecord._id),
         userId
       });
     } catch (jobErr) {

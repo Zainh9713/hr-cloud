@@ -71,8 +71,8 @@ export async function GET() {
 
     // 3. Detect Empty folders
     for (const folder of folders) {
-      const hasFiles = files.some(f => f.parentFolderId?.toString() === folder._id.toString());
-      const hasFolders = folders.some(f => f.parentId?.toString() === folder._id.toString());
+      const hasFiles = files.some(f => f.parentFolderId?.toString() === String(folder._id));
+      const hasFolders = folders.some(f => f.parentId?.toString() === String(folder._id));
       if (!hasFiles && !hasFolders) {
         suggestions.push({
           id: `empty_${folder._id}`,
@@ -130,7 +130,7 @@ export async function POST(req: Request) {
       
       return NextResponse.json({ 
         success: true, 
-        jobId: job._id.toString(),
+        jobId: String(job._id),
         message: "Neural analysis enqueued in background sector" 
       });
     }

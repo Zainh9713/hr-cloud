@@ -81,7 +81,7 @@ export class LocalVectorStore implements IVectorStore {
       if (emb) {
         const score = cosineSimilarity(queryEmbedding, emb);
         scoredFiles.push({
-          fileId: file._id.toString(),
+          fileId: String(file._id),
           score
         });
       }

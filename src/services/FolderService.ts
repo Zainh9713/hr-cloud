@@ -255,7 +255,7 @@ export class FolderService {
       // Find direct subfolders using projection to minimize memory
       const children = await Folder.find({ ownerId: userId, parentId: currentId }).select("_id");
       for (const child of children) {
-        const childId = child._id.toString();
+        const childId = String(child._id);
         descendants.push(childId);
         queue.push(childId);
       }

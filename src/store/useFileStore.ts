@@ -231,9 +231,9 @@ export const useFileStore = create<FileState>((set, get) => ({
     let depth = 0;
     
     while (currentId && depth < 100) {
-      const folder = allFolders.find((f) => f._id.toString() === currentId);
+      const folder = allFolders.find((f) => String(f._id) === currentId);
       if (!folder) break;
-      path.unshift({ id: folder._id.toString(), name: folder.name });
+      path.unshift({ id: String(folder._id), name: folder.name });
       currentId = folder.parentId ? folder.parentId.toString() : null;
       depth++;
     }

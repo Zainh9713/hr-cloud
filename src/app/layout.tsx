@@ -17,6 +17,9 @@ export const metadata: Metadata = {
   title: "H&R Cloud - Cyberpunk Storage",
   description: "Futuristic encrypted cloud storage solution",
   manifest: "/manifest.json",
+};
+
+export const viewport = {
   themeColor: "#4c1d95",
 };
 

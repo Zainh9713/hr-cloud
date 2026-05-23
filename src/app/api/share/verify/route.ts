@@ -43,7 +43,7 @@ export async function POST(request: Request) {
     // Update views counter for the initial verify view
     const ip = request.headers.get("x-forwarded-for") || null;
     const userAgent = request.headers.get("user-agent") || null;
-    await ShareService.logAccess(share._id.toString(), "view", ip, userAgent);
+    await ShareService.logAccess(String(share._id), "view", ip, userAgent);
 
     return NextResponse.json({
       success: true,

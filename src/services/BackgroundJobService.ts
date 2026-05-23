@@ -40,7 +40,7 @@ class BackgroundJobQueue {
       payload,
       status: "pending"
     });
-    this.queue.push(job._id.toString());
+    this.queue.push(String(job._id));
     this.processQueue();
     return job;
   }
@@ -66,7 +66,7 @@ class BackgroundJobQueue {
 
       const pendingJobs = await Job.find({ status: "pending" }).sort({ createdAt: 1 });
       for (const job of pendingJobs) {
-        const idStr = job._id.toString();
+        const idStr = String(job._id);
         if (!this.queue.includes(idStr)) {
           this.queue.push(idStr);
         }

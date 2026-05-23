@@ -21,7 +21,7 @@ export default async function DashboardLayout({
     const userDoc = await AuthService.getAuthUser(token);
     if (userDoc) {
       user = {
-        id: userDoc._id.toString(),
+        id: String(userDoc._id),
         name: userDoc.name,
         email: userDoc.email
       };
