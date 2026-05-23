@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --webpack",
-    "build": "next build",
+    "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint",
     "postinstall": "node -e \"const fs=require('fs');const src='node_modules/react-pdf/node_modules/pdfjs-dist/build/pdf.worker.min.mjs';if(fs.existsSync(src)){fs.copyFileSync(src,'public/pdf.worker.min.mjs');console.log('[postinstall] pdf.worker.min.mjs synced from react-pdf');}else{console.warn('[postinstall] react-pdf pdfjs worker not found, skipping');}\""
